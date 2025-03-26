@@ -9,7 +9,7 @@ const BookingModal = ({ show, handleClose, lesson }) => {
     lastName: '',
     email: '',
     phone: '',
-    date: '',
+    date: '2025-03-26',
     specialRequests: ''
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -21,7 +21,7 @@ const BookingModal = ({ show, handleClose, lesson }) => {
       lastName: '',
       email: '',
       phone: '',
-      date: '',
+      date: '2025-03-26',
       specialRequests: ''
     });
   }, []);
@@ -35,11 +35,11 @@ const BookingModal = ({ show, handleClose, lesson }) => {
   }, []);
 
   const getDateConstraints = useCallback(() => {
-    const tomorrow = new Date();
-    tomorrow.setDate(tomorrow.getDate() + 1);
-    const minDate = tomorrow.toISOString().split('T')[0];
+    // Set minimum date to March 26th, 2025
+    const minDate = '2025-03-26';
 
-    const maxDate = new Date();
+    // Set maximum date to 3 months from March 26th
+    const maxDate = new Date('2025-03-26');
     maxDate.setMonth(maxDate.getMonth() + 3);
     const maxDateStr = maxDate.toISOString().split('T')[0];
 
@@ -59,7 +59,7 @@ const BookingModal = ({ show, handleClose, lesson }) => {
         resort: lesson.resort,
         timeWindow: lesson.timeWindow,
         price: lesson.price,
-        bookingDate: new Date().toISOString(),
+        bookingDate: '2025-03-26T12:00:00.000Z',
         status: 'pending'
       };
 
@@ -176,7 +176,7 @@ const BookingModal = ({ show, handleClose, lesson }) => {
               required
             />
             <Form.Text className="text-muted">
-              Please select a date between tomorrow and 3 months from now
+              Please select a date between March 26th, 2025 and {new Date(maxDateStr).toLocaleDateString()}
             </Form.Text>
           </Form.Group>
 

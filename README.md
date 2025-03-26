@@ -69,13 +69,13 @@ Prompt: "give me a counter example';
    - [doc/Business Requirement.pdf](doc/Business%20Requirements.pdf)
 
 2. **Project Introduction Video**
-   - [Watch Video](https://drive.google.com/file/d/1Jzw2xOWU1JyYz2RRuEob_Q13asK3knp1/view?usp=sharing)
+   - [Watch Video](https://drive.google.com/file/d/1NAEMuZmSJaSz4W3vH5h4OTcAxb9mMYmR/view?usp=sharing)
 
 3. **Functional Programming Documentation**
    - [doc/README.md](doc/README.md)
 
 4. **Functional Programming Demonstrating Video**
-   - [Watch Demo](https://drive.google.com/file/d/1Jzw2xOWU1JyYz2RRuEob_Q13asK3knp1/view?usp=sharing)
+   - [Watch Demo](https://drive.google.com/file/d/1LXRFfJZLOBUUkJ1pCvzdqn2kLmvePRUk/view?usp=sharing)
 
 
 ## License

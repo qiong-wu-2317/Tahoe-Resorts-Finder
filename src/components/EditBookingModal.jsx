@@ -15,6 +15,18 @@ const EditBookingModal = ({ show, handleClose, booking, onUpdate }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState({ type: '', message: '' });
 
+  const getDateConstraints = useCallback(() => {
+    // Set minimum date to March 26th, 2025
+    const minDate = '2025-03-26';
+
+    // Set maximum date to 3 months from March 26th
+    const maxDate = new Date('2025-03-26');
+    maxDate.setMonth(maxDate.getMonth() + 3);
+    const maxDateStr = maxDate.toISOString().split('T')[0];
+
+    return { minDate, maxDateStr };
+  }, []);
+
   useEffect(() => {
     if (booking) {
       setFormData({
@@ -81,6 +93,8 @@ const EditBookingModal = ({ show, handleClose, booking, onUpdate }) => {
   }, [booking, formData, handleClose, onUpdate]);
 
   if (!booking) return null;
+
+  const { minDate, maxDateStr } = getDateConstraints();
 
   return (
     <Modal show={show} onHide={handleClose} size="lg">
@@ -160,8 +174,13 @@ const EditBookingModal = ({ show, handleClose, booking, onUpdate }) => {
               name="date"
               value={formData.date}
               onChange={handleInputChange}
+              min={minDate}
+              max={maxDateStr}
               required
             />
+            <Form.Text className="text-muted">
+              Please select a date between March 26th, 2025 and {new Date(maxDateStr).toLocaleDateString()}
+            </Form.Text>
           </Form.Group>
 
           <Form.Group className="mb-3">
