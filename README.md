@@ -66,7 +66,7 @@ Prompt: "give me a counter example';
 ## Resources
 
 1. **Business Requirements Document**
-   - [doc/Business Requirement.pdf](doc/Business%20Requirement.pdf)
+   - [doc/Business Requirement.pdf](doc/Business%20Requirements.pdf)
 
 2. **Project Introduction Video**
    - [Watch Video](https://drive.google.com/file/d/1Jzw2xOWU1JyYz2RRuEob_Q13asK3knp1/view?usp=sharing)
