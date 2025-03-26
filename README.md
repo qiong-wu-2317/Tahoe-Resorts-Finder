@@ -5,19 +5,17 @@ A React-based web application for finding and booking ski lessons at Tahoe area 
 ## Project Overview
 
 This application allows users to:
-- Browse available ski lessons across different Tahoe resorts
-- Filter lessons by type, level, resort, and time period
+- Browse and filter available trails across different Tahoe resorts
+- Browse and filter available ski lessons across different Tahoe resorts
 - Book lessons with specific instructors
 - Manage bookings (view, edit, delete)
 
-## Business Requirements
-[doc/Business Requirements.pdf]
 
 ## Setup and Installation
 
 1. Clone the repository
 ```bash
-git clone [https://github.com/qiong-wu-2317/Tahoe-Resorts-Finder]
+git clone https://github.com/qiong-wu-2317/Tahoe-Resorts-Finder
 ```
 
 2. Install dependencies
@@ -30,24 +28,27 @@ npm install
 npm run dev
 ```
 
+## Implementation Details
+
+### Functional Programming Principles
+The project implements core functional programming concepts:
+- Pure functions for business logic
+- Immutable state management
+- First-class and higher-order functions
+- Declarative programming style
+
+
+For detailed implementation examples, see: [doc/README.md](doc/README.md)
+
 ## AI Usage (ChatGPT-4)
 
-### 1. Persona Development
-Used ChatGPT-4 to create user personas based on business requirements:
+### 1. Code Development
+Used ChatGPT-4 for:
+- Implementation of functional programming principles
+- Component structure optimization
+- Bug resolution and debugging
 
-**Prompt Used:**
-```
-Based on the following business requirements for a Tahoe ski lesson booking system:
-- Lesson filtering by type, level, and resort
-- Booking management system
-- User-friendly interface
-Please create detailed user personas representing typical users of this system.
-```
-
-### 2. Bug Resolution
-Used ChatGPT-4 for debugging assistance:
-
-**Example Bug Fix:**
+### 2. Bug Resolution Example
 ```
 Prompt: "BookingModal.jsx:102 Uncaught ReferenceError: Row is not defined"
 
@@ -55,10 +56,28 @@ Response: Added missing import from React Bootstrap:
 import { Row, Col } from 'react-bootstrap';
 ```
 
-### 3. Code Quality Improvements
-Used ChatGPT-4 for:
-- Implementation of functional programming principles
-**Prompt Used:**
+### 3. README file
 ```
-give me an exaple that my code is using First-Class Functions
+Prompt: "help me fix the format of my readme file"
 ```
+
+
+
+## Resources
+
+1. **Business Requirements Document**
+   - [doc/Business Requirement.pdf](doc/Business%20Requirement.pdf)
+
+2. **Project Introduction Video**
+   - [Watch Video](https://drive.google.com/file/d/1Jzw2xOWU1JyYz2RRuEob_Q13asK3knp1/view?usp=sharing)
+
+3. **Functional Programming Documentation**
+   - [doc/README.md](doc/README.md)
+
+4. **Implementation Demo Video**
+   - [Watch Demo](https://drive.google.com/file/d/1Jzw2xOWU1JyYz2RRuEob_Q13asK3knp1/view?usp=sharing)
+
+
+## License
+
+This project is licensed under the MIT License.
