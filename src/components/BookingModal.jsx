@@ -1,0 +1,212 @@
+import React, { useState, useCallback } from 'react';
+import { Modal, Form, Button, Alert, Row, Col } from 'react-bootstrap';
+import { collection, addDoc, getFirestore } from 'firebase/firestore';
+import { app } from '../../db/firebaseConfig.js';
+
+const BookingModal = ({ show, handleClose, lesson }) => {
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
+    date: '',
+    specialRequests: ''
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState({ type: '', message: '' });
+
+  const resetForm = useCallback(() => {
+    setFormData({
+      firstName: '',
+      lastName: '',
+      email: '',
+      phone: '',
+      date: '',
+      specialRequests: ''
+    });
+  }, []);
+
+  const handleInputChange = useCallback((e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  }, []);
+
+  const getDateConstraints = useCallback(() => {
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    const minDate = tomorrow.toISOString().split('T')[0];
+
+    const maxDate = new Date();
+    maxDate.setMonth(maxDate.getMonth() + 3);
+    const maxDateStr = maxDate.toISOString().split('T')[0];
+
+    return { minDate, maxDateStr };
+  }, []);
+
+  const handleSubmit = useCallback(async (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitStatus({ type: '', message: '' });
+
+    try {
+      const bookingData = {
+        ...formData,
+        lessonId: lesson.id,
+        lessonType: lesson.lessonType,
+        resort: lesson.resort,
+        timeWindow: lesson.timeWindow,
+        price: lesson.price,
+        bookingDate: new Date().toISOString(),
+        status: 'pending'
+      };
+
+      const db = getFirestore(app);
+      await addDoc(collection(db, 'books'), bookingData);
+      
+      setSubmitStatus({
+        type: 'success',
+        message: 'Booking submitted successfully! We will contact you shortly.'
+      });
+
+      resetForm();
+
+      setTimeout(() => {
+        handleClose();
+        setSubmitStatus({ type: '', message: '' });
+      }, 2000);
+
+    } catch (error) {
+      console.error('Error submitting booking:', error);
+      setSubmitStatus({
+        type: 'danger',
+        message: 'An error occurred while submitting your booking. Please try again.'
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  }, [formData, lesson, handleClose, resetForm]);
+
+  if (!lesson) return null;
+
+  const { minDate, maxDateStr } = getDateConstraints();
+
+  return (
+    <Modal show={show} onHide={handleClose} size="lg">
+      <Modal.Header closeButton>
+        <Modal.Title>Book Lesson at {lesson.resort}</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <div className="mb-3">
+          <h5>Lesson Details:</h5>
+          <p>
+            <strong>Type:</strong> {lesson.lessonType}<br />
+            <strong>Time:</strong> {lesson.timeWindow}<br />
+            <strong>Price:</strong> ${lesson.price}
+          </p>
+        </div>
+
+        {submitStatus.message && (
+          <Alert variant={submitStatus.type} className="mb-3">
+            {submitStatus.message}
+          </Alert>
+        )}
+
+        <Form onSubmit={handleSubmit}>
+          <Row>
+            <Col md={6}>
+              <Form.Group className="mb-3">
+                <Form.Label>First Name</Form.Label>
+                <Form.Control
+                  type="text"
+                  name="firstName"
+                  value={formData.firstName}
+                  onChange={handleInputChange}
+                  required
+                />
+              </Form.Group>
+            </Col>
+            <Col md={6}>
+              <Form.Group className="mb-3">
+                <Form.Label>Last Name</Form.Label>
+                <Form.Control
+                  type="text"
+                  name="lastName"
+                  value={formData.lastName}
+                  onChange={handleInputChange}
+                  required
+                />
+              </Form.Group>
+            </Col>
+          </Row>
+
+          <Form.Group className="mb-3">
+            <Form.Label>Email</Form.Label>
+            <Form.Control
+              type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleInputChange}
+              required
+            />
+          </Form.Group>
+
+          <Form.Group className="mb-3">
+            <Form.Label>Phone Number</Form.Label>
+            <Form.Control
+              type="tel"
+              name="phone"
+              value={formData.phone}
+              onChange={handleInputChange}
+              required
+            />
+          </Form.Group>
+
+          <Form.Group className="mb-3">
+            <Form.Label>Preferred Date</Form.Label>
+            <Form.Control
+              type="date"
+              name="date"
+              value={formData.date}
+              onChange={handleInputChange}
+              min={minDate}
+              max={maxDateStr}
+              required
+            />
+            <Form.Text className="text-muted">
+              Please select a date between tomorrow and 3 months from now
+            </Form.Text>
+          </Form.Group>
+
+          <Form.Group className="mb-3">
+            <Form.Label>Special Requests</Form.Label>
+            <Form.Control
+              as="textarea"
+              name="specialRequests"
+              value={formData.specialRequests}
+              onChange={handleInputChange}
+              rows={3}
+            />
+          </Form.Group>
+
+          <div className="d-flex justify-content-end gap-2">
+            <Button variant="secondary" onClick={handleClose}>
+              Cancel
+            </Button>
+            <Button 
+              variant="primary" 
+              type="submit"
+              disabled={isSubmitting}
+            >
+              {isSubmitting ? 'Submitting...' : 'Confirm Booking'}
+            </Button>
+          </div>
+        </Form>
+      </Modal.Body>
+    </Modal>
+  );
+};
+
+export default BookingModal; 
