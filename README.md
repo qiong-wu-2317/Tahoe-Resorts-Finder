@@ -42,13 +42,7 @@ For detailed implementation examples, see: [doc/README.md](doc/README.md)
 
 ## AI Usage (ChatGPT-4)
 
-### 1. Code Development
-Used ChatGPT-4 for:
-- Implementation of functional programming principles
-- Component structure optimization
-- Bug resolution and debugging
-
-### 2. Bug Resolution Example
+### 1. Bug Resolution Example
 ```
 Prompt: "BookingModal.jsx:102 Uncaught ReferenceError: Row is not defined"
 
@@ -56,9 +50,15 @@ Response: Added missing import from React Bootstrap:
 import { Row, Col } from 'react-bootstrap';
 ```
 
-### 3. README file
+### 2. README file
 ```
 Prompt: "help me fix the format of my readme file"
+```
+
+### 3. Functional Programming Demonstrating
+```
+Prompt: "How is my code using First class function';
+Prompt: "give me a counter example';
 ```
 
 
@@ -74,7 +74,7 @@ Prompt: "help me fix the format of my readme file"
 3. **Functional Programming Documentation**
    - [doc/README.md](doc/README.md)
 
-4. **Implementation Demo Video**
+4. **Functional Programming Demonstrating Video**
    - [Watch Demo](https://drive.google.com/file/d/1Jzw2xOWU1JyYz2RRuEob_Q13asK3knp1/view?usp=sharing)
 
 
