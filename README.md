@@ -50,12 +50,19 @@ Response: Added missing import from React Bootstrap:
 import { Row, Col } from 'react-bootstrap';
 ```
 
-### 2. README file
+### 2. Generate initial data
+```
+Prompt: "generate 9 trails in 3 different resorts in tahoe in three different levels"
+Prompt: "generate 6 courses for 3 different resorts in tahoe"
+```
+
+
+### 3. README file
 ```
 Prompt: "help me fix the format of my readme file"
 ```
 
-### 3. Functional Programming Demonstrating
+### 4. Functional Programming Demonstrating
 ```
 Prompt: "How is my code using First class function';
 Prompt: "give me a counter example';
